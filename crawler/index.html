@@ -1,0 +1,42 @@
+<html>
+	<head>
+	<meta charset="UTF-8">
+	  <script src="recursos/jquery.js"></script>
+	  <script type="text/javascript">
+	  	function loop(f,t){
+	  		setInterval(f,t);
+	  	}
+	  	function buscaEmails(){
+	  		var divLista;
+		  	$.ajax({
+			    type: "POST",
+			    url: 'src/crawler.php',
+			    //data: {action: 'busca10'},
+			    success: function(data){
+			        divLista = document.getElementById("Lista");
+			        divLista.innerHTML += "<p>10 ÚLTIMOS EMAILS CADASTRADOS:<br>"+data+"<br><br></p>";
+			    }
+			});
+	  	}
+	  	function buscaInfo(){
+	  		var divLista;
+		  	$.ajax({
+			    type: "POST",
+			    url: 'src/crawler.php',
+			    success: function(data){
+			        divStatus = document.getElementById("status");
+			        divStatus.innerHTML += "<p> Rodando ... <br></p>";
+			    }
+			});
+	  	}
+	  </script>
+	</head>
+	<body>
+		<form method="POST">
+			 <!--<input value="INICIAR" type="button" onClick="loop(buscaInfo(),5000)" />-->
+			 <input value="Visualizar Emails" type="button" onClick="loop(buscaEmails(),1000)" />
+		</form>
+		<div id="status"></div>
+		<div id="Lista"></div>
+	</body>
+</html>
